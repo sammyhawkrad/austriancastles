@@ -7,16 +7,17 @@
 
 header {
   display: flex;
-  padding: 2rem;
+  padding: 20px;
   width: max-content;
   z-index: 2;
   position: fixed;
   top: 2rem;
   right: 2rem;
-  background-color: #ffe1a854;
+  background-color: rgb(255, 225, 168, 0.5);
   align-items: center;
   justify-content: space-between;
   /* flex-direction: row-reverse; */
+  text-align: center;
 }
 
 a,
@@ -33,7 +34,10 @@ a,
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 24px;
+  color: #472d30;
+  font-weight: bold;
+  margin: 0;
 }
 
 #map {

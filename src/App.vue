@@ -7,7 +7,7 @@ import InfoBox from './components/InfoBox.vue';
 <template>
   <header>
     <h1>Austrian Castles</h1>
-    <img alt="Vue logo" class="logo" src="@/assets/fortress.svg" width="50" height="50" />
+    <img alt="fortress" class="logo" src="@/assets/fortress.svg" width="50" height="50" />
   </header>
   <MapComponent />
   <InfoBox />
