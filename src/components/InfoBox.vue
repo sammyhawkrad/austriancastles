@@ -3,7 +3,97 @@
 </script>
 
 <template>
-  <div id="infobox"></div>
+  <div id="infobox">
+    <div id="headline">
+      <div id="left-items">
+        <img class="logo" alt="logo" src="@/assets/fortress.svg" width="40" height="40"/>
+        <h2>CASTLE NAME</h2>
+      </div>
+      <div id="right-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
+        <path fill="none" stroke="#472d30" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="m9 9l3 3m0 0l3 3m-3-3l-3 3m3-3l3-3m-3 12a9 9 0 1 1 0-18a9 9 0 0 1 0 18Z"></path>
+        </svg>
+      </div>
+    </div>
+    <div id="time-place-line">
+      <img class="location" alt="location" src="@/assets/castlelocation.svg" width="40" height="40"/>
+      <p>Vienna</p>
+      <img class="time" alt="time" src="@/assets/time.svg" width="40" height="40"/>
+      <p>mentioned 1500</p>
+    </div>
+    <img class="img-castle" alt="castle" src="@/assets/disney-castle.jpg"/>
+    <div id="description"> 
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#infobox {
+  background-color: #e26d5c;
+  position: absolute;
+  width: 25%;
+  height: 75%;
+  left: 72vw;
+  top: 9vw;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#headline {
+  display: flex;
+  justify-content: space-between;
+}
+
+#left-items {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  width: 80%;
+}
+
+#right-item {
+  margin-left: auto;
+  padding: 10px;
+}
+
+#headline .logo {
+  margin-right: 10px;
+}
+
+h2 {
+  font-size: 25px;
+  color: #723d46;
+  font-weight: bold;
+  text-align: center;
+}
+
+#time-place-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto;
+  width: 90%;
+}
+
+.img-castle {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+
+#description {
+  width: 90%;
+  margin: auto;
+  overflow: auto;
+}
+
+p {
+  color: 472d30;
+}
+</style>
