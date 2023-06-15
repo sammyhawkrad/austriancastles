@@ -9,9 +9,9 @@
         <img class="logo" alt="logo" src="@/assets/fortress.svg" width="40" height="40"/>
         <h2>CASTLE NAME</h2>
       </div>
-      <div id="right-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
-        <path fill="none" stroke="#472d30" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="m9 9l3 3m0 0l3 3m-3-3l-3 3m3-3l3-3m-3 12a9 9 0 1 1 0-18a9 9 0 0 1 0 18Z"></path>
+      <div id="close-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+          <path fill="#472d30" d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5Z"></path>
         </svg>
       </div>
     </div>
@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 2%;
 }
 
 #headline {
@@ -55,9 +56,16 @@
   width: 80%;
 }
 
-#right-item {
+#close-button {
   margin-left: auto;
   padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+#close-button:hover {
+  opacity: 0.7;
+  background-color: lightgrey;
 }
 
 #headline .logo {
