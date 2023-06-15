@@ -31,7 +31,7 @@
 
 <style scoped>
 #infobox {
-  background-color: #e26d5c;
+  background-color: #ffe1a8;
   position: absolute;
   width: 25%;
   height: 75%;
@@ -85,6 +85,8 @@ h2 {
   width: 90%;
   display: block;
   margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 #description {
@@ -94,6 +96,25 @@ h2 {
 }
 
 p {
-  color: 472d30;
+  color: #472d30;
 }
+
+@media (max-width: 900px) {
+  #infobox {
+    width: 40%;
+    left: 57vw;
+    top: 15vw;
+  }
+}
+
+@media (max-width: 420px) {
+    #infobox {
+      width: 90%;
+      height: 85%;
+      left: 5vw;
+      top: 10vw;
+    } 
+}
+
+
 </style>
