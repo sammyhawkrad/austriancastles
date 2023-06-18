@@ -6,7 +6,7 @@ import InfoBox from './components/InfoBox.vue';
 
 <template>
   <header>
-    <h1>Austrian Castles</h1>
+    <h1 id="title">Austrian Castles</h1>
     <img alt="fortress" class="logo" src="@/assets/fortress.svg" width="50" height="50" />
   </header>
   <MapComponent />
@@ -15,5 +15,7 @@ import InfoBox from './components/InfoBox.vue';
 </template>
 
 <style scoped>
-
+#title {
+  margin-right: 1rem;
+}
 </style>
