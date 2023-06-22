@@ -31,6 +31,7 @@
   height: 40px;
   left: 1%;
   top: 87%;
+  cursor: pointer;
 }
 
 #about-box {
@@ -65,11 +66,7 @@
   padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in;
-}
-
-#close-button:hover {
-  opacity: 0.7;
-  background-color: lightgrey;
+  color: #472d30;
 }
 
 #headline .logo {
@@ -86,5 +83,11 @@ h2 {
 #about-text {
   padding-left: 2%;
   padding-right: 2%;
+}
+
+@media (max-width: 420px) {
+    #about-button {
+      display: none;
+    } 
 }
 </style>

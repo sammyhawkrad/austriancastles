@@ -2,6 +2,7 @@
 import AboutComponent from './components/AboutComponent.vue';
 import MapComponent from './components/MapComponent.vue';
 import InfoBox from './components/InfoBox.vue';
+import Toolbar from './components/Toolbar.vue';
 </script>
 
 <template>
@@ -12,10 +13,11 @@ import InfoBox from './components/InfoBox.vue';
   <MapComponent />
   <InfoBox />
   <AboutComponent />
+  <Toolbar />
 </template>
 
 <style scoped>
 #title {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 </style>

@@ -61,11 +61,7 @@
   padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in;
-}
-
-#close-button:hover {
-  opacity: 0.7;
-  background-color: lightgrey;
+  color: #472d30;
 }
 
 #headline .logo {
@@ -118,9 +114,10 @@ p {
 @media (max-width: 420px) {
     #infobox {
       width: 90%;
-      height: 85%;
+      height: 80%;
       left: 5vw;
       top: 10vw;
+      display: none;
     } 
 }
 
