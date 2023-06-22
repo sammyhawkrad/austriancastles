@@ -59,7 +59,7 @@ onMounted(() => {
     const data = await loadData();
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
-
+        layer.bindTooltip(feature.properties.name)
         if (feature.properties.name) {
           layer.setIcon(castleMarker)
         }
