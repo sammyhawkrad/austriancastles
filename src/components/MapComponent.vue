@@ -47,8 +47,12 @@ onMounted(() => {
   }
 
   const addCastles = async () => {
-    const castles = await loadData();
-    L.geoJSON(castles).addTo(map);
+    const data = await loadData();
+    const castles = L.geoJSON(data);
+    castles.addTo(map)
+    // const markers = L.markerClusterGroup()
+    // markers.addLayer(castles)
+    // map.addLayer(markers)
 
   }
   addCastles();
