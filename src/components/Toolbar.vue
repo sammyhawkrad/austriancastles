@@ -42,22 +42,17 @@
   justify-content: space-around;
   align-items: center;
   width: 100vw;
-  height: 10%;
   background-color: #c8caa3;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 15vw;
 }
 
 .layer-m, .region-m, .search-m, .about-m {
   cursor: pointer;
 }
-
-.layer-m:hover, .region-m:hover, .search-m:hover, .about-m:hover {
-  border: 2px solid #472d30;
-}
-
 
 @media (min-width: 421px) {
     #toolbar-m {
