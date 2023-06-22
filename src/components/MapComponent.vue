@@ -1,24 +1,43 @@
 <script setup>
 import { onMounted } from 'vue';
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-
+import * as L from "leaflet";
+import { GeocodingControl } from "@maptiler/geocoding-control/leaflet";
+import "@maptiler/geocoding-control/style.css";
 
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 
 
-
 onMounted(() => {
-  const map = L.map('map').setView([47.691, 13.388], 8);
-  map.fitBounds([[49.824, 19.666],[46.453, 8.498]]);
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    minZoom: 7,
-  }).addTo(map);
+  const apiKey = "3kTwvEjW6co3cJtocvxH";
+
+  const map = L.map(document.getElementById("map")).setView([47.691, 13.388], 8);
+
+  const scale = devicePixelRatio > 1.5 ? "@2x" : ""; // can change this
+
+  map.setMaxBounds(map.getBounds());
+
+  L.tileLayer(
+    `https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}${scale}.png?key=` + apiKey,
+    {
+      tileSize: 512,
+      zoomOffset: -1,
+      minZoom: 7,
+      maxZoom: 19,
+      attribution:
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a>, ' +
+        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      crossOrigin: true,
+      country: 'at'
+    }
+  ).addTo(map);
 
   L.control.scale({position:'bottomleft', metric: true, imperial: false}).addTo(map);
+
+  const maptiler = L.control.maptilerGeocoding({ apiKey });
+  maptiler.setPosition('topleft');
+  maptiler.addTo(map);
 
 
   const loadData = async () => {
@@ -34,24 +53,6 @@ onMounted(() => {
   }
   addCastles();
 
-  // L.Control.geocoder({
-  //   geocoder: L.Control.Geocoder.nominatim({
-  //       geocodingQueryParams: {countrycodes: 'at'}
-  //   })
-  // }).addTo(map);
-
-  // var options = {
-  //       position: 'topright',
-  //       geocoder: new L.Control.Geocoder.nominatim({
-  //           geocodingQueryParams: {
-  //               "countrycodes": "at"
-  //           }
-  //       })
-  //   };
-
-  //  L.Control.geocoder(options).addTo(map);
-  // console.log(map.getBounds())
-
 })
 
 
@@ -61,6 +62,10 @@ onMounted(() => {
   <div id="map"></div>
 </template>
 
-<style scoped>
-
+<style>
+  .leaflet-ctrl-geocoder{
+    border-color: red;
+    border-width: 0.3em;
+    border-style: solid;
+  }
 </style>
