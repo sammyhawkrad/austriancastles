@@ -4,9 +4,17 @@ import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
 import { GeocodingControl } from "@maptiler/geocoding-control/leaflet";
 import "@maptiler/geocoding-control/style.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+
+import "leaflet.markercluster/dist/leaflet.markercluster";
+
 
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
-
+const castleMarker = L.icon({
+  iconUrl: 'src/assets/pin.svg',
+  iconSize: [25, 41]
+});
 
 onMounted(() => {
 
@@ -34,6 +42,7 @@ onMounted(() => {
   ).addTo(map);
 
   L.control.scale({position:'bottomleft', metric: true, imperial: false}).addTo(map);
+  
 
   const maptiler = L.control.maptilerGeocoding({ apiKey });
   maptiler.setPosition('topleft');
@@ -48,12 +57,19 @@ onMounted(() => {
 
   const addCastles = async () => {
     const data = await loadData();
-    const castles = L.geoJSON(data);
-    castles.addTo(map)
-    // const markers = L.markerClusterGroup()
-    // markers.addLayer(castles)
-    // map.addLayer(markers)
+    const castles = L.geoJSON(data, {
+      onEachFeature: function (feature, layer) {
 
+        if (feature.properties.name) {
+          layer.setIcon(castleMarker)
+        }
+        
+        
+      }
+    });
+    const markers = L.markerClusterGroup()
+    markers.addLayer(castles)
+    map.addLayer(markers)
   }
   addCastles();
 

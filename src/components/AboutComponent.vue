@@ -75,6 +75,11 @@ const closeWindow = () => {
   margin: 0;
 }
 
+#close-button>svg:hover{
+  border: 2px solid #472d30;
+  border-radius: 50%;
+}
+
 #headline .logo {
   margin-right: 10px;
 }
