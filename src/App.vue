@@ -1,7 +1,6 @@
 <script setup>
 import AboutComponent from './components/AboutComponent.vue';
 import MapComponent from './components/MapComponent.vue';
-import InfoBox from './components/InfoBox.vue';
 import Toolbar from './components/Toolbar.vue';
 </script>
 
@@ -11,7 +10,6 @@ import Toolbar from './components/Toolbar.vue';
     <img alt="title-img" class="logo" src="@/assets/title-image.svg" width="50" height="50" />
   </header>
   <MapComponent />
-  <InfoBox />
   <AboutComponent />
   <Toolbar />
 </template>

@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted } from 'vue';
+import InfoBox from './InfoBox.vue';
+import { ref, onMounted } from 'vue';
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
 import { GeocodingControl } from "@maptiler/geocoding-control/leaflet";
@@ -9,7 +10,8 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 
 import "leaflet.markercluster/dist/leaflet.markercluster";
 
-
+const clickedCastle = ref({})
+const infoboxVisible = ref(false)
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const castleMarker = L.icon({
   iconUrl: 'src/assets/pin.svg',
@@ -59,11 +61,16 @@ onMounted(() => {
     const data = await loadData();
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
-        layer.bindTooltip(feature.properties.name)
+        layer.bindTooltip(feature.properties.name);
+
         if (feature.properties.name) {
-          layer.setIcon(castleMarker)
+          layer.setIcon(castleMarker);
         }
         
+        layer.on('click', function() {
+          clickedCastle.value = feature.properties;
+          infoboxVisible.value = true;
+        })
         
       }
     });
@@ -80,6 +87,7 @@ onMounted(() => {
 
 <template>
   <div id="map"></div>
+  <InfoBox v-if="infoboxVisible" @close='infoboxVisible = false' :clickedCastle="clickedCastle" :infoboxVisible="infoboxVisible"/>
 </template>
 
 <style>

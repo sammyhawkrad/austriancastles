@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue';
 
-const infoboxVisible = ref(true);
-const closeWindow = () => {
-  infoboxVisible.value = false;
-}
+defineProps({
+  clickedCastle: Object,
+  infoboxVisible: Boolean
+});
+
 </script>
 
 <template>
@@ -12,24 +12,24 @@ const closeWindow = () => {
     <div id="headline">
       <div id="left-items">
         <img class="logo" alt="logo" src="@/assets/fortress.svg" width="40" height="40"/>
-        <h2>CASTLE NAME</h2>
+        <h2>{{ clickedCastle.name }}</h2>
       </div>
-      <div id="close-button" @click="closeWindow">
+      <div id="close-button" @click="$emit('close')">
         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
           <path fill="#472d30" d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5Z"></path>
         </svg>
       </div>
     </div>
     <div id="time-place-line">
-      <img class="location" alt="location" src="@/assets/castlelocation.svg" width="40" height="40"/>
-      <p>Vienna</p>
-      <img class="time" alt="time" src="@/assets/time.svg" width="40" height="40"/>
-      <p>mentioned 1500</p>
+      <img class="location" alt="location" src="@/assets/castlelocation.svg" width="20" height="20"/>
+      <p>{{ `${clickedCastle.location}, ${clickedCastle.state}` }}</p>
+      <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20"/>
+      <p>{{ clickedCastle.start_date? clickedCastle.start_date: clickedCastle['time of origin'] }}</p>
     </div>
-    <img class="img-castle" alt="castle" src="@/assets/disney-castle.jpg"/>
+    <img class="img-castle" alt="castle" src="@/assets/disney-castle.jpg" />
+    <!-- <img class="img-castle" alt="castle" :src="clickedCastle.image_url" /> -->
     <div id="description"> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
+      <p>{{ clickedCastle['description-translated'] }}</p>
     </div>
   </div>
 </template>
@@ -128,7 +128,6 @@ p {
       height: 80%;
       left: 5vw;
       top: 10vw;
-      display: none;
     } 
 }
 
