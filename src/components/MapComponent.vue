@@ -1,13 +1,20 @@
 <script setup>
 import InfoBox from './InfoBox.vue';
+// import "fuse.js/dist/fuse.js";
+// import "fuse.js/dist/fuse-min.js";
+import Fuse from "fuse.js"
 import { ref, onMounted } from 'vue';
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
+import "../assets/leaflet.fusesearch.js";
+import "../assets/leaflet.fusesearch.css";
+
+import "../assets/Leaflet.AnimatedSearchBox.js";
+import "../assets/Leaflet.AnimatedSearchBox.css";
 import { GeocodingControl } from "@maptiler/geocoding-control/leaflet";
 import "@maptiler/geocoding-control/style.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
-
 import "leaflet.markercluster/dist/leaflet.markercluster";
 
 const clickedCastle = ref({})
@@ -57,30 +64,112 @@ onMounted(() => {
     return data
   }
 
+  //first search
+  var searchCtrl = L.control.fuseSearch()
+  console.log("fusesearch")
+  searchCtrl.addTo(map);
+  
+  // second search
+  var searchbox = L.control.searchbox({
+    position: 'topright',
+    expand: 'left'
+  }).addTo(map);
+  
+
+  // filter
+  var fortress = L.layerGroup();
+  var castle = L.layerGroup();
+    var fortress = L.layerGroup();
+    var overlayMaps = {
+      "Castles": castle,
+      "Fortresses": fortress
+    };
+   L.control.layers(overlayMaps).addTo(map);
+  
   const addCastles = async () => {
     const data = await loadData();
+    
+    
+    console.log("search ctrl")
+    console.log(data)
+    // searchCtrl.indexFeatures(data, ['name']); // first search
+
+
+    var castlesnames = data.features.map(({properties}) => properties.name)
+    var fuse = new Fuse(castlesnames, {
+        shouldSort: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        minMatchCharLength: 1
+    });
+    searchbox.onInput("keyup", function (e) {
+        if (e.keyCode == 13) {
+            search();
+        } else {
+            var value = searchbox.getValue();
+            if (value != "") {
+                var results = fuse.search(value);
+                searchbox.setItems(results.map(res => res.item).slice(0, 5));
+            } else {
+                searchbox.clearItems();
+            }
+        }
+    });
+
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
         layer.bindTooltip(feature.properties.name);
+        // feature.layer = layer;
 
         if (feature.properties.name) {
           layer.setIcon(castleMarker);
+        }
+        
+        if(feature.properties.castle_type == "defensive" || feature.properties.castle_type == "defensive;stately") {
+          // layerControl.addOverlay(ObjektLayer,feature.properties.control)
+          console.log("defensive")
         }
         
         layer.on('click', function() {
           clickedCastle.value = feature.properties;
           infoboxVisible.value = true;
         })
-        
+       
+        // L.geoJson(data, {
+        //   onEachFeature: function (feature, layer) {
+        //       feature.layer = layer;
+        //   }
+        // });
       }
     });
+    
+    
     const markers = L.markerClusterGroup()
     markers.addLayer(castles)
     map.addLayer(markers)
+
+  //   // var fortress = L.layerGroup();
+  //   var castle = L.layerGroup();
+  //   var fortress = L.geoJson(myJson, {filter: fortressFilter}).addTo(map);
+  //   function fortressFilter(feature) {
+  //     if (feature.properties.castle_type === "defensive") return true
+  //   }
+  //   var overlayMaps = {
+  //     "Castles": castle,
+  //     "Fortresses": fortress
+  //   };
+  //  L.control.layers(overlayMaps).addTo(map);
+
+    // L.map('map', { searchControl: {layer: castles} });
   }
   addCastles();
 
+  
 })
+
+
+
 
 
 </script>

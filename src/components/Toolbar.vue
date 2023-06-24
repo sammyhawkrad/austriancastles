@@ -13,7 +13,10 @@
     </div>
     <div id="buttons">
         <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
-        <img class="filterbyregion" alt="region" src="@/assets/filterbyregion.svg" width="40" height="40"/>
+        <v-btn @click.once="filterCastles">
+          <img class="filterbyregion" alt="region" src="@/assets/filterbyregion.svg" width="40" height="40"/>
+        </v-btn>
+        
     </div>
 </template>
 
