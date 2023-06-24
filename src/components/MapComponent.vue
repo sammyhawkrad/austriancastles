@@ -16,12 +16,18 @@ import "@maptiler/geocoding-control/style.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/leaflet.markercluster";
+import "leaflet.featuregroup.subgroup";
 
 const clickedCastle = ref({})
 const infoboxVisible = ref(false)
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const castleMarker = L.icon({
   iconUrl: 'src/assets/pin.svg',
+  iconSize: [25, 41]
+});
+
+const fortressMarker = L.icon({
+  iconUrl: 'src/assets/castlelocation.svg',
   iconSize: [25, 41]
 });
 
@@ -64,10 +70,10 @@ onMounted(() => {
     return data
   }
 
-  //first search
-  var searchCtrl = L.control.fuseSearch()
-  console.log("fusesearch")
-  searchCtrl.addTo(map);
+  // //first search
+  // var searchCtrl = L.control.fuseSearch()
+  // console.log("fusesearch")
+  // searchCtrl.addTo(map);
   
   // second search
   var searchbox = L.control.searchbox({
@@ -75,16 +81,6 @@ onMounted(() => {
     expand: 'left'
   }).addTo(map);
   
-
-  // filter
-  var fortress = L.layerGroup();
-  var castle = L.layerGroup();
-    var fortress = L.layerGroup();
-    var overlayMaps = {
-      "Castles": castle,
-      "Fortresses": fortress
-    };
-   L.control.layers(overlayMaps).addTo(map);
   
   const addCastles = async () => {
     const data = await loadData();
@@ -103,6 +99,7 @@ onMounted(() => {
         distance: 100,
         minMatchCharLength: 1
     });
+
     searchbox.onInput("keyup", function (e) {
         if (e.keyCode == 13) {
             search();
@@ -116,20 +113,41 @@ onMounted(() => {
             }
         }
     });
+    searchbox.onButton("click", search);
+
+    function search() {
+      var value = searchbox.getValue();
+      if (value != "") {
+          var results = fuse.search(value);
+          $('#results').text(JSON.stringify(results, null, 2));
+          $('html, body').animate({
+              // scrollTop: $(".results-container").offset().top
+          }, 1000);
+      }
+    }
+
+    const markers = L.markerClusterGroup()
+    var castlesLayer = L.featureGroup.subGroup(markers).addTo(map);
+    var fortressLayer = L.featureGroup.subGroup(markers).addTo(map);
 
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
         layer.bindTooltip(feature.properties.name);
-        // feature.layer = layer;
+        feature.layer = layer;
 
         if (feature.properties.name) {
-          layer.setIcon(castleMarker);
+          
+          if(feature.properties.castle_type == "defensive" || feature.properties.castle_type == "defensive;stately") {
+            console.log("defensive");
+            castlesLayer.addLayer(layer);
+            layer.setIcon(castleMarker);
+          } else {
+            fortressLayer.addLayer(layer)
+            layer.setIcon(fortressMarker);
+          }
         }
         
-        if(feature.properties.castle_type == "defensive" || feature.properties.castle_type == "defensive;stately") {
-          // layerControl.addOverlay(ObjektLayer,feature.properties.control)
-          console.log("defensive")
-        }
+        
         
         layer.on('click', function() {
           clickedCastle.value = feature.properties;
@@ -145,27 +163,46 @@ onMounted(() => {
     });
     
     
-    const markers = L.markerClusterGroup()
+    // const markers = L.markerClusterGroup()
     markers.addLayer(castles)
     map.addLayer(markers)
+    // var castlesLayer = L.featureGroup.subGroup(markers).addTo(map);
+    // var fortressLayer = L.featureGroup.subGroup(markers).addTo(map);
+    // filter
+    // var castlesLayer = L.layerGroup();
+    // var fortressLayer = L.layerGroup();
+    var overlayMaps = {
+      "Castles": castlesLayer,
+      "Fortresses": fortressLayer
+    };
+    L.control.layers(null, overlayMaps).addTo(map);
+    
+    var options = {
+      position: 'topright',
+      title: 'Chercher',
+      placeholder: 'cdvdf',
+      maxResultLength: 7,
+      threshold: 0.2,
+      showInvisibleFeatures: false,
+      showResultFct: function(feature, container) {
+          var props = feature.properties,
+              name = L.DomUtil.create('b', null, container);
+          name.innerHTML = props.name;
 
-  //   // var fortress = L.layerGroup();
-  //   var castle = L.layerGroup();
-  //   var fortress = L.geoJson(myJson, {filter: fortressFilter}).addTo(map);
-  //   function fortressFilter(feature) {
-  //     if (feature.properties.castle_type === "defensive") return true
-  //   }
-  //   var overlayMaps = {
-  //     "Castles": castle,
-  //     "Fortresses": fortress
-  //   };
-  //  L.control.layers(overlayMaps).addTo(map);
+          container.appendChild(L.DomUtil.create('br', null, container));
+          container.appendChild(document.createTextNode(props.memory));
+      }
+    };
+    var fuseSearchCtrl = L.control.fuseSearch(options);
+    fuseSearchCtrl.indexFeatures(data.features, ['name']);
+    map.addControl(fuseSearchCtrl);
 
-    // L.map('map', { searchControl: {layer: castles} });
   }
   addCastles();
 
-  
+
+
+
 })
 
 
