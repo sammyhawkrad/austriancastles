@@ -6,14 +6,14 @@
 
 <template>
     <div id="toolbar-m">
-    <img class="layer-m" alt="about" src="@/assets/layers.svg" width="60" height="60"/>
-    <img class="region-m" alt="about" src="@/assets/region.svg" width="60" height="60"/>
-    <img class="search-m" alt="about" src="@/assets/search.svg" width="60" height="60"/>
-    <img class="about-m" alt="about" src="@/assets/about.svg" width="60" height="60"/>
+        <img class="layer-m" alt="about" src="@/assets/layers.svg" width="60" height="60"/>
+        <img class="region-m" alt="about" src="@/assets/filterbyregion.svg" width="60" height="60"/>
+        <img class="search-m" alt="about" src="@/assets/search.svg" width="60" height="60"/>
+        <img class="about-m" alt="about" src="@/assets/about.svg" width="60" height="60"/>
     </div>
     <div id="buttons">
         <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
-        <img class="filterbyregion" alt="region" src="@/assets/region.svg" width="40" height="40"/>
+        <img class="filterbyregion" alt="region" src="@/assets/filterbyregion.svg" width="40" height="40"/>
     </div>
 </template>
 
@@ -43,7 +43,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   background-color: #c8caa3;
   position: fixed;
   bottom: 0;
@@ -66,14 +66,14 @@
   html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
   }
 
   template {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
   }
   .search {

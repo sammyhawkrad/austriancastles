@@ -17,7 +17,7 @@ const closeWindow = () => {
   <div v-if="aboutboxVisible" id="about-box">
     <div id="headline">
         <div id="castleLogo">
-          <img class="logo" alt="logo" src="@/assets/about.svg" width="40" height="40"/>
+          <img class="about2" alt="about" src="@/assets/about.svg" width="40" height="40"/>
         </div>
           <h2>ABOUT</h2>
         <div id="close-button" @click="closeWindow">
@@ -44,8 +44,6 @@ const closeWindow = () => {
       <p id="created-by">Created by: Yi Zhen Chew, Ulrike Holfeld, Samuel Darkwah (TU Wien)</p>
     </div>
   </div>
-  div
-  <img class="about-m" alt="about" src="@/assets/about-mobile.svg" width="60" height="60"/>
 </template>
 
 <style scoped>
@@ -57,6 +55,7 @@ const closeWindow = () => {
   left: 1%;
   top: 87%;
   cursor: pointer;
+  border: solid #472d30 2px;
 }
 
 #about-box {
@@ -96,8 +95,13 @@ const closeWindow = () => {
   border-radius: 50%;
 }
 
-#headline .logo {
+#headline {
   margin-right: 10px;
+}
+
+.about2 {
+  margin-right: 10px;
+  border: 2px solid #472d30;
 }
 
 h2 {
@@ -128,6 +132,15 @@ h3 {
 #created-by {
   font-style: italic;
   padding: 10px;
+  color: #472d30;
+}
+
+@media (max-width: 900px) {
+  #about-box {
+    width: 40%;
+    left: 57vw;
+    top: 15vw;
+  }
 }
 
 @media (max-width: 420px) {

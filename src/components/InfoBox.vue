@@ -37,7 +37,7 @@ defineProps({
 <style scoped>
 #infobox {
   background-color: #ffe1a8;
-  position: absolute;
+  position: fixed;
   width: 25%;
   height: 75%;
   left: 72vw;
@@ -125,9 +125,9 @@ p {
 @media (max-width: 420px) {
     #infobox {
       width: 90%;
-      height: 80%;
+      height: 75%;
       left: 5vw;
-      top: 10vw;
+      top: 20vw;
     } 
 }
 

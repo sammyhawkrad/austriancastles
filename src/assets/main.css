@@ -3,6 +3,7 @@
 #app {
   margin: 0 auto;
   font-weight: normal;
+  overflow: hidden;
 }
 
 header {
@@ -51,6 +52,25 @@ h1 {
 
 @media (max-width: 420px) {
   #map {
-    bottom: 60px;
+    height: calc(100vh - 60px);
+    top: 60px;
   }
-} 
+  header {
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffe1a8;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 370px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
