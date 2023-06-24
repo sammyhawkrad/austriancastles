@@ -42,7 +42,7 @@ defineProps({
   height: 75%;
   left: 72vw;
   top: 9vw;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

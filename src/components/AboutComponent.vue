@@ -26,7 +26,23 @@ const closeWindow = () => {
           </svg>
         </div>
     </div>
-    <p id="about-text">about our project<br>functionalities<br>tools<br>sources with link, licenses</p>
+    <div id="about-text">
+      <h3>The Project</h3>
+      <p id="about-paragraph">We built an interactive map of castles in Austria, focusing on two types: fortresses and defensive castles. 
+      Instead of learning about castles from various sources, this application combines relevant information in one user-friendly platform. 
+      The interactive map gives an overview over the distribution of castles across Austria and provides a better understanding of their historical 
+      and cultural significance within a specific area. The map is addressed to tourists and castle enthusiasts who are looking for information 
+      about castles they like or might want to visit. </p>
+      <h3>Functions</h3>
+      <p id="about-paragraph">The map includes interactive elements for an optimal user experience. By clicking on a marker in the map, users get 
+      access to information about a castle. They can search for a specific castle/town??? and filter by castle type.</p>
+      <h3>Tools</h3>
+      <p id="about-paragraph">Leaflet, Vue???, Adobe Illustrator</p>
+      <h3>Sources and Licences</h3>
+      <p id="about-paragraph"><a href="https://www.openstreetmap.org/">Openstreetmap</a>, <a href="https://www.wikipedia.org/">Wikipedia</a>, <a href="https://www.wikidata.org/">Wikidata</a></p>
+      <br>
+      <p id="created-by">Created by: Yi Zhen Chew, Ulrike Holfeld, Samuel Darkwah (TU Wien)</p>
+    </div>
   </div>
   div
   <img class="about-m" alt="about" src="@/assets/about-mobile.svg" width="60" height="60"/>
@@ -93,9 +109,25 @@ h2 {
   padding: 10px;
 }
 
+h3 {
+  font-family: MedievalSharp;
+  color: #723d46;
+  font-weight: bold;
+  text-align: center;
+}
+
 #about-text {
-    width: 80%;
     overflow: auto;
+}
+
+#about-paragraph {
+  padding: 10px;
+  color: #472d30;
+}
+
+#created-by {
+  font-style: italic;
+  padding: 10px;
 }
 
 @media (max-width: 420px) {
