@@ -14,7 +14,7 @@ const clickedCastle = ref({})
 const infoboxVisible = ref(false)
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const castleMarker = L.icon({
-  iconUrl: 'src/assets/pin.svg',
+  iconUrl: 'src/assets/pin-fortress.svg',
   iconSize: [25, 41]
 });
 
@@ -96,4 +96,5 @@ onMounted(() => {
     border-width: 0.3em;
     border-style: solid;
   }
+
 </style>

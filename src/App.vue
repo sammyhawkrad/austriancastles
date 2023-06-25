@@ -15,7 +15,4 @@ import Toolbar from './components/Toolbar.vue';
 </template>
 
 <style scoped>
-#title {
-  margin-right: 2rem;
-}
 </style>

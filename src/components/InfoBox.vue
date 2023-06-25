@@ -38,14 +38,14 @@ defineProps({
 #infobox {
   background-color: #ffe1a8;
   position: fixed;
-  width: 25%;
+  width: 30%;
   height: 75%;
-  left: 72vw;
-  top: 9vw;
+  top: 8rem;
+  right: 2rem;
   z-index: 3;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content:flex-start;
   border-radius: 2%;
 }
 
@@ -80,7 +80,6 @@ defineProps({
 
 h2 {
   font-family: MedievalSharp;
-  font-size: 25px;
   color: #723d46;
   font-weight: bold;
   text-align: center;
@@ -92,42 +91,52 @@ h2 {
   justify-content: space-around;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 90%;
 }
 
 .img-castle {
   width: 90%;
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 100%;
   height: auto;
 }
 
 #description {
   width: 90%;
-  margin: auto;
   overflow: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
 }
 
 p {
   color: #472d30;
+  margin-left: 7px;
 }
 
 @media (max-width: 900px) {
   #infobox {
     width: 40%;
-    left: 57vw;
-    top: 15vw;
+  }
+}
+
+@media (max-width: 650px) {
+  #infobox {
+    width: 60%;
   }
 }
 
 @media (max-width: 420px) {
     #infobox {
       width: 90%;
-      height: 75%;
-      left: 5vw;
-      top: 20vw;
+      height: 76%;
+      top: 5.5rem;
+      left: 5%;
+      right: 5%;
     } 
 }
 

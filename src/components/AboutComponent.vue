@@ -39,9 +39,9 @@ const closeWindow = () => {
       <h3>Tools</h3>
       <p id="about-paragraph">Leaflet, Vue???, Adobe Illustrator</p>
       <h3>Sources and Licences</h3>
-      <p id="about-paragraph"><a href="https://www.openstreetmap.org/">Openstreetmap</a>, <a href="https://www.wikipedia.org/">Wikipedia</a>, <a href="https://www.wikidata.org/">Wikidata</a></p>
+      <p id="link"><a href="https://www.openstreetmap.org/">Openstreetmap</a><br><a href="https://www.wikipedia.org/">Wikipedia</a><br><a href="https://www.wikidata.org/">Wikidata</a></p>
       <br>
-      <p id="created-by">Created by: Yi Zhen Chew, Ulrike Holfeld, Samuel Darkwah (TU Wien)</p>
+      <p id="created-by">Created by: Yi Zhen Chew, Ulrike Holfeld, Samuel Darkwah (TU Wien, 2023)</p>
     </div>
   </div>
 </template>
@@ -60,11 +60,11 @@ const closeWindow = () => {
 
 #about-box {
   background-color: #ffe1a8;
-  position: absolute;
-  width: 25%;
+  position: fixed;
+  width: 30%;
   height: 75%;
-  left: 72vw;
-  top: 9vw;
+  top: 8rem;
+  right: 2rem;
   z-index: 3;
   border-radius: 2%;
   display: flex;
@@ -129,17 +129,27 @@ h3 {
   color: #472d30;
 }
 
+a {
+  padding: 10px;
+  color: #e26d5c;
+}
+
 #created-by {
   font-style: italic;
   padding: 10px;
   color: #472d30;
+  font-size: 80%;
 }
 
 @media (max-width: 900px) {
   #about-box {
     width: 40%;
-    left: 57vw;
-    top: 15vw;
+  }
+}
+
+@media (max-width: 650px) {
+  #about-box {
+    width: 60%;
   }
 }
 
