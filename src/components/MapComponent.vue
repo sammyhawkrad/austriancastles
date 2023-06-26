@@ -6,8 +6,9 @@ import Fuse from "fuse.js"
 import { ref, onMounted } from 'vue';
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
-import "../assets/leaflet.fusesearch.js";
+import * as myfuseSearch from "../assets/leaflet.fusesearch.js";
 import "../assets/leaflet.fusesearch.css";
+// import "../assets/zoom-mobile.js";
 
 import "../assets/Leaflet.AnimatedSearchBox.js";
 import "../assets/Leaflet.AnimatedSearchBox.css";
@@ -33,13 +34,17 @@ const fortressMarker = L.icon({
 
 onMounted(() => {
 
+  // let recaptchaScript = document.createElement('script')
+  // recaptchaScript.setAttribute('src', '/assets/leaflet.fusesearch.js')
+  // document.head.appendChild(recaptchaScript)
+
   const apiKey = "3kTwvEjW6co3cJtocvxH";
 
   const map = L.map(document.getElementById("map")).setView([47.691, 13.388], 8);
 
   const scale = devicePixelRatio > 1.5 ? "@2x" : ""; // can change this
 
-  map.setMaxBounds(map.getBounds());
+  map.fitBounds([[45.77579087036024, 7.899644901157423],[49.981425155587345, 19.77734080646181]]);
 
   L.tileLayer(
     `https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}${scale}.png?key=` + apiKey,
@@ -80,6 +85,10 @@ onMounted(() => {
     position: 'topright',
     expand: 'left'
   }).addTo(map);
+
+  // if (L.Browser.mobile) {
+  //   map.removeControl(map.zoomControl);
+  // }
   
   
   const addCastles = async () => {
@@ -132,7 +141,13 @@ onMounted(() => {
 
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
-        layer.bindTooltip(feature.properties.name);
+        // layer.bindTooltip("<div style='background:blue';>" + feature.properties.name + "</div>", {direction: 'top', offset: [0, -25]});
+        layer.bindTooltip(feature.properties.name, {
+            direction: 'top', 
+            offset: [0, -25], 
+            className: 'tooltip'
+          });
+
         feature.layer = layer;
 
         if (feature.properties.name) {
@@ -153,30 +168,19 @@ onMounted(() => {
           clickedCastle.value = feature.properties;
           infoboxVisible.value = true;
         })
-       
-        // L.geoJson(data, {
-        //   onEachFeature: function (feature, layer) {
-        //       feature.layer = layer;
-        //   }
-        // });
       }
     });
     
-    
-    // const markers = L.markerClusterGroup()
     markers.addLayer(castles)
     map.addLayer(markers)
-    // var castlesLayer = L.featureGroup.subGroup(markers).addTo(map);
-    // var fortressLayer = L.featureGroup.subGroup(markers).addTo(map);
-    // filter
-    // var castlesLayer = L.layerGroup();
-    // var fortressLayer = L.layerGroup();
+
     var overlayMaps = {
       "Castles": castlesLayer,
       "Fortresses": fortressLayer
     };
     L.control.layers(null, overlayMaps).addTo(map);
     
+    // search
     var options = {
       position: 'topright',
       title: 'Chercher',
@@ -207,8 +211,6 @@ onMounted(() => {
 
 
 
-
-
 </script>
 
 <template>
@@ -222,4 +224,42 @@ onMounted(() => {
     border-width: 0.3em;
     border-style: solid;
   }
+
+.marker-cluster-small {
+  background-color: #aa4d4499;
+}
+.marker-cluster-small div {
+  background-color: #aa4d4499;
+}
+
+.marker-cluster-medium {
+    background-color: #723d4699;
+}
+.marker-cluster-medium div {
+  background-color: #723d4699;
+}
+
+.marker-cluster-large {
+  background-color: #472d3099;
+}
+.marker-cluster-large div {
+  background-color: #472d3099;
+}
+
+.marker-cluster span {
+  color: white;
+}
+
+.tooltip {
+  background: #ffe1a8;
+  border: #ffe1a8;
+  color: 2px solid #472d30;
+  border-top-color: #ffe1a8
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: #ffe1a8
+}
+
+
 </style>
