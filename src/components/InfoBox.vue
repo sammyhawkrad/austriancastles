@@ -26,8 +26,8 @@ defineProps({
       <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20"/>
       <p>{{ clickedCastle.start_date? clickedCastle.start_date: clickedCastle['time of origin'] }}</p>
     </div>
-    <img class="img-castle" alt="castle" src="@/assets/disney-castle.jpg" />
-    <!-- <img class="img-castle" alt="castle" :src="clickedCastle.image_url" /> -->
+    <img v-if="!clickedCastle.img_file" class="img-castle" alt="castle" src='@/assets/disney-castle.jpg' />
+    <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" /> 
     <div id="description"> 
       <p>{{ clickedCastle['description-translated'] }}</p>
     </div>
