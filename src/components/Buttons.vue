@@ -35,7 +35,7 @@ const closeWindow = () => {
       about castles they like or might want to visit. </p>
       <h3>Functions</h3>
       <p id="about-paragraph">The map includes interactive elements for an optimal user experience. By clicking on a marker in the map, users get 
-      access to information about a castle. They can search for a specific castle/town??? and filter by castle type.</p>
+      access to information about a castle. They can search for a specific castle and filter by castle type.</p>
       <h3>Tools</h3>
       <p id="about-paragraph">Leaflet, Vue, Geoserver, Postgres, Adobe Illustrator</p>
       <h3>Sources and Licences</h3>
