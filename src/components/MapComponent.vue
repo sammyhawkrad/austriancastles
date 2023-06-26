@@ -244,41 +244,41 @@ onMounted(() => {
     border-style: solid;
   }
 
-  .marker-cluster-small {
-    background-color: #aa4d4499;
-  }
-  .marker-cluster-small div {
-    background-color: #aa4d4499;
-  }
+.marker-cluster-small {
+  background-color: #aa4d4499;
+}
+.marker-cluster-small div {
+  background-color: #aa4d4499;
+}
 
-  .marker-cluster-medium {
-      background-color: #723d4699;
-  }
-  .marker-cluster-medium div {
+.marker-cluster-medium {
     background-color: #723d4699;
-  }
+}
+.marker-cluster-medium div {
+  background-color: #723d4699;
+}
 
-  .marker-cluster-large {
-    background-color: #472d3099;
-  }
-  .marker-cluster-large div {
-    background-color: #472d3099;
-  }
+.marker-cluster-large {
+  background-color: #472d3099;
+}
+.marker-cluster-large div {
+  background-color: #472d3099;
+}
 
-  .marker-cluster span {
-    color: white;
-  }
+.marker-cluster span {
+  color: white;
+}
 
-  .tooltip {
-    background: #ffe1a8;
-    border: #ffe1a8;
-    color: 2px solid #472d30;
-    border-top-color: #ffe1a8
-  }
+.tooltip {
+  background: #ffe1a8;
+  border: #ffe1a8;
+  color: 2px solid #472d30;
+  border-top-color: #ffe1a8
+}
 
-  .leaflet-tooltip-top:before {
-    border-top-color: #ffe1a8
-  }
+.leaflet-tooltip-top:before {
+  border-top-color: #ffe1a8
+}
 
   .layers-castletypes {
     background-image: url('../assets/layers.svg');

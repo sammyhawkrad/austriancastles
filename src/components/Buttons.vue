@@ -47,13 +47,12 @@ const closeWindow = () => {
 
   <div id="toolbar-m">
     <img class="layer-m" alt="about" src="@/assets/layers.svg" width="60" height="60"/>
-    <img class="region-m" alt="about" src="@/assets/region.svg" width="60" height="60"/>
     <img class="search-m" alt="about" src="@/assets/search.svg" width="60" height="60"/>
     <img class="about-m" alt="about" src="@/assets/about.svg" width="60" height="60" @click="openWindow"/>
     </div>
     <div id="buttons">
         <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
-        <img class="filterbyregion" alt="region" src="@/assets/region.svg" width="40" height="40"/>
+        <img class="layers" alt="about" src="@/assets/layers.svg" width="40" height="40"/>
     </div>
 </template>
 
@@ -191,7 +190,7 @@ a:hover {
   border: solid 2px #472d30;
 }
 
-.filterbyregion {
+.layers {
   top: 25%;
   left: 1%;
   position: absolute;
@@ -199,6 +198,7 @@ a:hover {
   cursor: pointer;
   border: solid 2px #472d30;
 }
+
 
 #toolbar-m {
   display: flex;
@@ -214,7 +214,7 @@ a:hover {
   height: 60px;
 }
 
-.layer-m, .region-m, .search-m, .about-m {
+.layer-m, .search-m, .about-m {
   cursor: pointer;
 }
 
@@ -238,11 +238,8 @@ a:hover {
     height: 100%;
     overflow: hidden;
   }
-  .search {
+  .search, .layers {
       display: none;
     }
-  .filterbyregion {
-      display: none;
-  }
 }
 </style>
