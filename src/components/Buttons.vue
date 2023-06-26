@@ -37,13 +37,24 @@ const closeWindow = () => {
       <p id="about-paragraph">The map includes interactive elements for an optimal user experience. By clicking on a marker in the map, users get 
       access to information about a castle. They can search for a specific castle/town??? and filter by castle type.</p>
       <h3>Tools</h3>
-      <p id="about-paragraph">Leaflet, Vue???, Adobe Illustrator</p>
+      <p id="about-paragraph">Leaflet, Vue, Geoserver, Postgres, Adobe Illustrator</p>
       <h3>Sources and Licences</h3>
       <p id="link"><a href="https://www.openstreetmap.org/">Openstreetmap</a><br><a href="https://www.wikipedia.org/">Wikipedia</a><br><a href="https://www.wikidata.org/">Wikidata</a></p>
       <br>
       <p id="created-by">Created by: Yi Zhen Chew, Ulrike Holfeld, Samuel Darkwah (TU Wien, 2023)</p>
     </div>
   </div>
+
+  <div id="toolbar-m">
+    <img class="layer-m" alt="about" src="@/assets/layers.svg" width="60" height="60"/>
+    <img class="region-m" alt="about" src="@/assets/region.svg" width="60" height="60"/>
+    <img class="search-m" alt="about" src="@/assets/search.svg" width="60" height="60"/>
+    <img class="about-m" alt="about" src="@/assets/about.svg" width="60" height="60" @click="openWindow"/>
+    </div>
+    <div id="buttons">
+        <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
+        <img class="filterbyregion" alt="region" src="@/assets/region.svg" width="40" height="40"/>
+    </div>
 </template>
 
 <style scoped>
@@ -131,6 +142,11 @@ h3 {
 
 a {
   padding: 10px;
+  color: #472d30;
+  font-style: italic;
+}
+
+a:hover {
   color: #e26d5c;
 }
 
@@ -158,7 +174,75 @@ a {
       display: none;
     } 
     #about-box {
+      width: 90%;
+      height: 76%;
+      top: 5.5rem;
+      left: 5%;
+      right: 5%;
+    } 
+}
+
+.search {
+  top: 15%;
+  left: 1%;
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+  border: solid 2px #472d30;
+}
+
+.filterbyregion {
+  top: 25%;
+  left: 1%;
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+  border: solid 2px #472d30;
+}
+
+#toolbar-m {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-color: #c8caa3;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+}
+
+.layer-m, .region-m, .search-m, .about-m {
+  cursor: pointer;
+}
+
+@media (min-width: 421px) {
+    #toolbar-m {
+      display: none;
+    } 
+}
+
+@media (max-width: 420px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  template {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+  .search {
       display: none;
     }
+  .filterbyregion {
+      display: none;
+  }
 }
 </style>

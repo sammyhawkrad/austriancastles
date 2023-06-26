@@ -40,13 +40,6 @@ a,
   transition: 0.4s;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: #c9cba3;
-    border-radius: 3px;
-  }
-}
-
 h1 {
   font-family: MedievalSharp;
   color: #472d30;
