@@ -1,7 +1,6 @@
 <script setup>
-import AboutComponent from './components/AboutComponent.vue';
+import Buttons from './components/Buttons.vue';
 import MapComponent from './components/MapComponent.vue';
-import Toolbar from './components/Toolbar.vue';
 </script>
 
 <template>
@@ -10,12 +9,9 @@ import Toolbar from './components/Toolbar.vue';
     <img alt="title-img" class="logo" src="@/assets/title-image.svg" width="50" height="50" />
   </header>
   <MapComponent />
-  <AboutComponent />
-  <Toolbar />
+  <Buttons />
+  
 </template>
 
 <style scoped>
-#title {
-  margin-right: 2rem;
-}
 </style>

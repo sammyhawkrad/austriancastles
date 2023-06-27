@@ -3,43 +3,82 @@
 #app {
   margin: 0 auto;
   font-weight: normal;
+  overflow: hidden;
 }
 
 header {
   display: flex;
-  padding: 20px;
-  width: max-content;
+  padding: 15px;
+  width: 30%;
   z-index: 2;
   position: fixed;
   top: 2rem;
   right: 2rem;
-  background-color: rgba(255, 225, 168, 0.3);
+  background-color: rgba(255, 225, 168);
   align-items: center;
   justify-content: space-between;
   /* flex-direction: row-reverse; */
   text-align: center;
+  border-radius: 2%;
+}
+
+@media (max-width: 900px) {
+  header {
+    width: 40%;
+  }
+}
+
+@media (max-width: 650px) {
+  header {
+    width: 60%;
+  }
 }
 
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: #472d30;
   transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
 }
 
 h1 {
   font-family: MedievalSharp;
-  font-size: 2rem;
   color: #472d30;
   font-weight: bold;
   margin: 0;
+  font-size: 28px;
 }
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 730px) {
+  h1 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 670px) {
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 450px) {
+  h1 {
+    font-size: 23px;
+  }
+}
+
 
 #map {
   height: 100vh;
@@ -50,6 +89,26 @@ h1 {
 
 @media (max-width: 420px) {
   #map {
-    bottom: 60px;
+    height: calc(100vh - 60px);
+    top: 60px;
   }
-} 
+  header {
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffe1a8;
+    border-radius: 0%;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 370px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}

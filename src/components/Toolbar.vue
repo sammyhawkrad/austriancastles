@@ -70,17 +70,3 @@
     height: 100%;
     overflow: hidden;
   }
-
-  template {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .search {
-      display: none;
-    }
-  .filterbyregion {
-      display: none;
-  }
-}
-</style>

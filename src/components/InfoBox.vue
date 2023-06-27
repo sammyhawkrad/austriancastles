@@ -26,8 +26,11 @@ defineProps({
       <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20"/>
       <p>{{ clickedCastle.start_date? clickedCastle.start_date: clickedCastle['time of origin'] }}</p>
     </div>
-    <img class="img-castle" alt="castle" src="@/assets/disney-castle.jpg" />
-    <!-- <img class="img-castle" alt="castle" :src="clickedCastle.image_url" /> -->
+    <div class="img-castle-box">
+      <img v-if="!clickedCastle.img_file" class="img-castle" alt="castle" src='@/assets/disney-castle.jpg' />
+      <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" /> 
+    </div>
+    
     <div id="description"> 
       <p>{{ clickedCastle['description-translated'] }}</p>
     </div>
@@ -37,15 +40,15 @@ defineProps({
 <style scoped>
 #infobox {
   background-color: #ffe1a8;
-  position: absolute;
-  width: 25%;
+  position: fixed;
+  width: 30%;
   height: 75%;
-  left: 72vw;
-  top: 9vw;
-  z-index: 2;
+  top: 8rem;
+  right: 2rem;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content:flex-start;
   border-radius: 2%;
 }
 
@@ -80,7 +83,6 @@ defineProps({
 
 h2 {
   font-family: MedievalSharp;
-  font-size: 25px;
   color: #723d46;
   font-weight: bold;
   text-align: center;
@@ -92,42 +94,84 @@ h2 {
   justify-content: space-around;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 90%;
 }
 
-.img-castle {
+/* .img-castle-box {
   width: 90%;
+  aspect-ratio: 16/9;
+  margin: auto;
+}
+
+.img-castle {
+ display: flex;
+  align-items: center;
+  justify-content: center;
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 100%;
   height: auto;
+  width: inherit;
+} */
+
+.img-castle-box {
+  display: block;
+  position: relative;
+}
+
+.img-castle-box:before {
+  content: '';
+  display: block;
+  width: 90%;
+  padding-top: 56.25%;
+}
+
+.img-castle {
+  position: absolute;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #description {
   width: 90%;
-  margin: auto;
   overflow: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
 }
 
 p {
   color: #472d30;
+  margin-left: 7px;
 }
 
 @media (max-width: 900px) {
   #infobox {
     width: 40%;
-    left: 57vw;
-    top: 15vw;
+  }
+}
+
+@media (max-width: 650px) {
+  #infobox {
+    width: 60%;
   }
 }
 
 @media (max-width: 420px) {
     #infobox {
       width: 90%;
-      height: 80%;
-      left: 5vw;
-      top: 10vw;
+      height: 76%;
+      top: 5.5rem;
+      left: 5%;
+      right: 5%;
     } 
 }
 
