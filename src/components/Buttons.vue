@@ -51,8 +51,8 @@ const closeWindow = () => {
     <img class="about-m" alt="about" src="@/assets/about.svg" width="60" height="60" @click="openWindow"/>
     </div>
     <div id="buttons">
-        <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
-        <img class="layers" alt="about" src="@/assets/layers.svg" width="40" height="40"/>
+        <!-- <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/> -->
+        <!-- <img class="filterbyregion" alt="region" src="@/assets/region.svg" width="40" height="40"/> -->
     </div>
 </template>
 

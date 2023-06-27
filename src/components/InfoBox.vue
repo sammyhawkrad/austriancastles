@@ -26,8 +26,11 @@ defineProps({
       <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20"/>
       <p>{{ clickedCastle.start_date? clickedCastle.start_date: clickedCastle['time of origin'] }}</p>
     </div>
-    <img v-if="!clickedCastle.img_file" class="img-castle" alt="castle" src='@/assets/placeholder-img.svg' />
-    <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" /> 
+    <div class="img-castle-box">
+      <img v-if="!clickedCastle.img_file" class="img-castle" alt="castle" src='@/assets/disney-castle.jpg' />
+      <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" /> 
+    </div>
+    
     <div id="description"> 
       <p>{{ clickedCastle['description-translated'] }}</p>
     </div>
@@ -96,13 +99,45 @@ h2 {
   width: 90%;
 }
 
-.img-castle {
+/* .img-castle-box {
   width: 90%;
+  aspect-ratio: 16/9;
+  margin: auto;
+}
+
+.img-castle {
+ display: flex;
+  align-items: center;
+  justify-content: center;
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
   height: auto;
+  width: inherit;
+} */
+
+.img-castle-box {
+  display: block;
+  position: relative;
+}
+
+.img-castle-box:before {
+  content: '';
+  display: block;
+  width: 90%;
+  padding-top: 56.25%;
+}
+
+.img-castle {
+  position: absolute;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #description {

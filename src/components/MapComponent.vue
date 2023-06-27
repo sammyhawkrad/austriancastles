@@ -18,11 +18,14 @@ import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet.featuregroup.subgroup";
+// import leafletSearchSrc from 'leaflet-search';
+// import "leaflet-search/src/leaflet-search.css"
+// import "leaflet-search/src/leaflet-search.js"
 
 const clickedCastle = ref({})
 const infoboxVisible = ref(false)
 const geoserver = 'http://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
-const castleMarker = L.icon({
+const defensiveMarker = L.icon({
   iconUrl: 'src/assets/pin-defensive.svg',
   iconSize: [25, 41]
 });
@@ -33,7 +36,7 @@ const fortressMarker = L.icon({
 });
 
 onMounted(() => {
-
+  
   // let recaptchaScript = document.createElement('script')
   // recaptchaScript.setAttribute('src', '/assets/leaflet.fusesearch.js')
   // document.head.appendChild(recaptchaScript)
@@ -62,11 +65,11 @@ onMounted(() => {
   ).addTo(map);
 
   L.control.scale({position:'bottomleft', metric: true, imperial: false}).addTo(map);
-  
+  // var searchLayer = L.layerGroup({position: 'topleft'}).addTo(map);
 
-  const maptiler = L.control.maptilerGeocoding({ apiKey });
-  maptiler.setPosition('topleft');
-  maptiler.addTo(map);
+  // const maptiler = L.control.maptilerGeocoding({ apiKey });
+  // maptiler.setPosition('topleft');
+  // maptiler.addTo(map);
 
 
   const loadData = async () => {
@@ -81,10 +84,10 @@ onMounted(() => {
   // searchCtrl.addTo(map);
   
   // second search
-  var searchbox = L.control.searchbox({
-    position: 'topright',
-    expand: 'left'
-  }).addTo(map);
+  // var searchbox = L.control.searchbox({
+  //   position: 'topleft',
+  //   expand: 'left'
+  // }).addTo(map);
 
   // if (L.Browser.mobile) {
   //   map.removeControl(map.zoomControl);
@@ -94,11 +97,23 @@ onMounted(() => {
   const addCastles = async () => {
     const data = await loadData();
     
+    const markers = L.markerClusterGroup()
+    var defensiveLayer = L.featureGroup.subGroup(markers).addTo(map);
+    var fortressLayer = L.featureGroup.subGroup(markers).addTo(map);
+    var overlayMaps = {
+      'Defensive': defensiveLayer,
+      "Fortresses": fortressLayer
+    };
+    L.control.layers(null, overlayMaps, {position: 'topleft'}).addTo(map);
     
     console.log("search ctrl")
     console.log(data)
     // searchCtrl.indexFeatures(data, ['name']); // first search
 
+    var searchbox = L.control.searchbox({
+    position: 'topleft',
+    expand: 'left'
+  }).addTo(map);
 
     var castlesnames = data.features.map(({properties}) => properties.name)
     var fuse = new Fuse(castlesnames, {
@@ -125,9 +140,18 @@ onMounted(() => {
     searchbox.onButton("click", search);
 
     function search() {
+      setTimeout(function () {
+                searchbox.hide();
+                searchbox.clear();
+            }, 600);
       var value = searchbox.getValue();
+      console.log("value is " + value)
+      var getLatLng = data.features.filter(({properties}) => properties.name == value);
+      console.log("get lat lng" + JSON.stringify(getLatLng.properties))
       if (value != "") {
+          
           var results = fuse.search(value);
+          console.log("results is " + results)
           $('#results').text(JSON.stringify(results, null, 2));
           $('html, body').animate({
               // scrollTop: $(".results-container").offset().top
@@ -135,9 +159,8 @@ onMounted(() => {
       }
     }
 
-    const markers = L.markerClusterGroup()
-    var castlesLayer = L.featureGroup.subGroup(markers).addTo(map);
-    var fortressLayer = L.featureGroup.subGroup(markers).addTo(map);
+
+    
 
     const castles = L.geoJSON(data, {
       onEachFeature: function (feature, layer) {
@@ -154,8 +177,8 @@ onMounted(() => {
           
           if(feature.properties.castle_type == "defensive" || feature.properties.castle_type == "defensive;stately") {
             console.log("defensive");
-            castlesLayer.addLayer(layer);
-            layer.setIcon(castleMarker);
+            defensiveLayer.addLayer(layer);
+            layer.setIcon(defensiveMarker);
           } else {
             fortressLayer.addLayer(layer)
             layer.setIcon(fortressMarker);
@@ -168,16 +191,22 @@ onMounted(() => {
           clickedCastle.value = feature.properties;
           infoboxVisible.value = true;
         })
+        // if(feature.properties.castle_type == ) {
+        //   layer.on('searchclick', function() {
+
+        //   })
+        // }
+        
       }
     });
     
     markers.addLayer(castles)
     map.addLayer(markers)
 
-    var overlayMaps = {
-      "Castles": castlesLayer,
-      "Fortresses": fortressLayer
-    };
+    // var overlayMaps = {
+    //   '<i class="defensiveIcon"></i>Defensive': defensiveLayer,
+    //   "Fortresses": fortressLayer
+    // };
 
     // L.Control.Layers.TogglerIcon = L.Control.Layers.extend({
     //   options: {
@@ -197,28 +226,31 @@ onMounted(() => {
     // L.control.layers(null, overlayMaps, {togglerClassName: 'layers-castletypes'}).addTo(map);
     // layerCastleTypes.addTo(map);
 
-    L.control.layers(null, overlayMaps).addTo(map);
-    
-    // search
-    var options = {
-      position: 'topright',
-      title: 'Chercher',
-      placeholder: 'cdvdf',
-      maxResultLength: 7,
-      threshold: 0.2,
-      showInvisibleFeatures: false,
-      showResultFct: function(feature, container) {
-          var props = feature.properties,
-              name = L.DomUtil.create('b', null, container);
-          name.innerHTML = props.name;
+    // L.control.layers(null, overlayMaps, {position: 'topleft'}).addTo(map);
 
-          container.appendChild(L.DomUtil.create('br', null, container));
-          container.appendChild(document.createTextNode(props.memory));
-      }
-    };
-    var fuseSearchCtrl = L.control.fuseSearch(options);
-    fuseSearchCtrl.indexFeatures(data.features, ['name']);
-    map.addControl(fuseSearchCtrl);
+    
+    // map.addControl(new L.Control.Search({layer: searchLayer}));
+
+    // search
+    // var options = {
+    //   position: 'topleft',
+    //   title: 'Chercher',
+    //   placeholder: 'Choose a castle',
+    //   maxResultLength: 7,
+    //   threshold: 0.2,
+    //   showInvisibleFeatures: false,
+    //   showResultFct: function(feature, container) {
+    //       var props = feature.properties,
+    //           name = L.DomUtil.create('b', null, container);
+    //       name.innerHTML = props.name;
+
+    //       container.appendChild(L.DomUtil.create('br', null, container));
+    //       container.appendChild(document.createTextNode(props.memory));
+    //   }
+    // };
+    // var fuseSearchCtrl = L.control.fuseSearch(options);
+    // fuseSearchCtrl.indexFeatures(data.features, ['name']);
+    // map.addControl(fuseSearchCtrl);
 
   }
   addCastles();
@@ -280,7 +312,7 @@ onMounted(() => {
   border-top-color: #ffe1a8
 }
 
-  .layers-castletypes {
+  /* .layers-castletypes {
     background-image: url('../assets/layers.svg');
     width: 36px;
       height: 36px;
@@ -290,6 +322,26 @@ onMounted(() => {
     background-image: url('../assets/layers.svg');
     width: 36px;
     height: 36px;
+  } */
+
+  /* .leaflet-top.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle {
+      background-image: url('../assets/layers.svg') /*set you value*/
+  /* } */ 
+
+  /* .defensiveIcon {
+    background-image: url('../assets/layers.svg')
+  } */
+
+  .leaflet-retina .leaflet-control-layers-toggle { 
+    /* width:auto; */
+    background-image: url('../assets/layers.svg');
+    width: 33px;
+    height: 33px;
+    /* padding:3px;
+    padding-left:36px;
+    text-decoration:none;
+    line-height:36px; */
+
 }
 
 </style>
