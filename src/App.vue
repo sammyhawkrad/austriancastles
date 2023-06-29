@@ -1,5 +1,5 @@
 <script setup>
-import Buttons from './components/Buttons.vue';
+import ButtonsComponent from './components/ButtonsComponent.vue';
 import MapComponent from './components/MapComponent.vue';
 </script>
 
@@ -9,7 +9,7 @@ import MapComponent from './components/MapComponent.vue';
     <img alt="title-img" class="logo" src="@/assets/title-image.svg" width="50" height="50" />
   </header>
   <MapComponent />
-  <Buttons />
+  <ButtonsComponent />
   
 </template>
 
