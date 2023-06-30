@@ -24,7 +24,7 @@ import leaflet from 'leaflet'
       expand: 'left',
       collapsed: true,
       width: null,
-      iconPath: './src/assets/search.svg',
+      iconPath: 'search.svg',
       autocompleteFeatures: ['setValueOnClick']
     },
 
