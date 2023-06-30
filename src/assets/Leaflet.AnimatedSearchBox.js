@@ -1,3 +1,5 @@
+import leaflet from 'leaflet';
+
 (function (factory, window) {
 
     // define an AMD module that relies on 'leaflet'
@@ -6,7 +8,7 @@
 
         // define a Common JS module that relies on 'leaflet'
     } else if (typeof exports === 'object') {
-        var leaflet = window.leaflet;
+        //var leaflet = window.leaflet;
         module.exports = factory(leaflet);
         //module.exports = factory(require('leaflet'));
     }
