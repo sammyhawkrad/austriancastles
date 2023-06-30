@@ -1,37 +1,51 @@
 <script setup>
-
 defineProps({
   clickedCastle: Object,
   infoboxVisible: Boolean
-});
-
+})
 </script>
 
 <template>
   <div v-if="infoboxVisible" id="infobox">
     <div id="headline">
       <div id="left-items">
-        <img class="logo" alt="logo" src="@/assets/fortress.svg" width="40" height="40"/>
+        <img class="logo" alt="logo" src="@/assets/fortress.svg" width="40" height="40" />
         <h2>{{ clickedCastle.name }}</h2>
       </div>
       <div id="close-button" @click="$emit('close')">
         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-          <path fill="#472d30" d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5Z"></path>
+          <path
+            fill="#472d30"
+            d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5Z"
+          ></path>
         </svg>
       </div>
     </div>
     <div id="time-place-line">
-      <img class="location" alt="location" src="@/assets/castlelocation.svg" width="20" height="20"/>
+      <img
+        class="location"
+        alt="location"
+        src="@/assets/castlelocation.svg"
+        width="20"
+        height="20"
+      />
       <p>{{ `${clickedCastle.location}, ${clickedCastle.state}` }}</p>
-      <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20"/>
-      <p>{{ clickedCastle.start_date? clickedCastle.start_date: clickedCastle['time of origin'] }}</p>
+      <img class="time" alt="time" src="@/assets/time.svg" width="20" height="20" />
+      <p>
+        {{ clickedCastle.start_date ? clickedCastle.start_date : clickedCastle['time of origin'] }}
+      </p>
     </div>
     <div class="img-castle-box">
-      <img v-if="!clickedCastle.img_file" class="img-castle" alt="castle" src='@/assets/disney-castle.jpg' />
-      <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" /> 
+      <img
+        v-if="!clickedCastle.img_file"
+        class="img-castle"
+        alt="castle"
+        src="@/assets/disney-castle.jpg"
+      />
+      <img v-else class="img-castle" alt="castle" :src="`https:${clickedCastle.img_file}`" />
     </div>
-    
-    <div id="description"> 
+
+    <div id="description">
       <p>{{ clickedCastle['description-translated'] }}</p>
     </div>
   </div>
@@ -48,7 +62,7 @@ defineProps({
   z-index: 3;
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: flex-start;
   border-radius: 2%;
 }
 
@@ -72,7 +86,7 @@ defineProps({
   color: #472d30;
 }
 
-#close-button>svg:hover{
+#close-button > svg:hover {
   border: 2px solid #472d30;
   border-radius: 50%;
 }
@@ -98,24 +112,6 @@ h2 {
   margin-right: auto;
   width: 90%;
 }
-
-/* .img-castle-box {
-  width: 90%;
-  aspect-ratio: 16/9;
-  margin: auto;
-}
-
-.img-castle {
- display: flex;
-  align-items: center;
-  justify-content: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 100%;
-  height: auto;
-  width: inherit;
-} */
 
 .img-castle-box {
   display: block;
@@ -166,14 +162,12 @@ p {
 }
 
 @media (max-width: 420px) {
-    #infobox {
-      width: 90%;
-      height: 76%;
-      top: 5.5rem;
-      left: 5%;
-      right: 5%;
-    } 
+  #infobox {
+    width: 90%;
+    height: 76%;
+    top: 5.5rem;
+    left: 5%;
+    right: 5%;
+  }
 }
-
-
 </style>

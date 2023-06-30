@@ -1,26 +1,25 @@
-<script setup>
-
-</script>
-
-
+<script setup></script>
 
 <template>
-    <div id="toolbar-m">
-    <img class="layer-m" alt="about" src="@/assets/layers-mobile.svg" width="60" height="60"/>
-    <img class="region-m" alt="about" src="@/assets/region-mobile.svg" width="60" height="60"/>
-    <img class="search-m" alt="about" src="@/assets/search-mobile.svg" width="60" height="60"/>
-    <img class="about-m" alt="about" src="@/assets/about-mobile.svg" width="60" height="60"/>
+  <div id="toolbar-m">
+    <img class="layer-m" alt="about" src="@/assets/layers-mobile.svg" width="60" height="60" />
+    <img class="region-m" alt="about" src="@/assets/region-mobile.svg" width="60" height="60" />
+    <img class="search-m" alt="about" src="@/assets/search-mobile.svg" width="60" height="60" />
+    <img class="about-m" alt="about" src="@/assets/about-mobile.svg" width="60" height="60" />
+  </div>
+  <div id="buttons">
+    <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40" />
+    <div @click.once="filterCastles">
+      <img
+        class="filterbyregion"
+        alt="region"
+        src="@/assets/filterbyregion.svg"
+        width="40"
+        height="40"
+      />
     </div>
-    <div id="buttons">
-        <img class="search" alt="search" src="@/assets/search.svg" width="40" height="40"/>
-        <div @click.once="filterCastles">
-          <img class="filterbyregion" alt="region" src="@/assets/filterbyregion.svg" width="40" height="40"/>
-        </div>
-        
-    </div>
+  </div>
 </template>
-
-
 
 <style scoped>
 .search {
@@ -53,21 +52,26 @@
   height: 15vw;
 }
 
-.layer-m, .region-m, .search-m, .about-m {
+.layer-m,
+.region-m,
+.search-m,
+.about-m {
   cursor: pointer;
 }
 
 @media (min-width: 421px) {
-    #toolbar-m {
-      display: none;
-    } 
+  #toolbar-m {
+    display: none;
+  }
 }
 
 @media (max-width: 420px) {
-  html, body {
+  html,
+  body {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
   }
 }
+</style>

@@ -1,6 +1,6 @@
 <script setup>
-import ButtonsComponent from './components/ButtonsComponent.vue';
-import MapComponent from './components/MapComponent.vue';
+import ButtonsComponent from './components/ButtonsComponent.vue'
+import MapComponent from './components/MapComponent.vue'
 </script>
 
 <template>
@@ -10,8 +10,6 @@ import MapComponent from './components/MapComponent.vue';
   </header>
   <MapComponent />
   <ButtonsComponent />
-  
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
