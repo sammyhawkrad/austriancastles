@@ -18,12 +18,12 @@ const clickedCastle = ref({})
 const infoboxVisible = ref(false)
 const geoserver = 'https://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const defensiveMarker = L.icon({
-  iconUrl: 'src/assets/pin-defensive.svg',
+  iconUrl: '@/assets/pin-defensive.svg',
   iconSize: [25, 41]
 });
 
 const fortressMarker = L.icon({
-  iconUrl: 'src/assets/pin-fortress.svg',
+  iconUrl: '@/assets/pin-fortress.svg',
   iconSize: [25, 41]
 });
 
@@ -202,7 +202,7 @@ onMounted(() => {
 
 
 .leaflet-retina .leaflet-control-layers-toggle { 
-    background-image: url('../assets/layers.svg');
+    background-image: url('@/assets/layers.svg');
     width: 33px;
     height: 33px;
 
