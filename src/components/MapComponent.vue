@@ -18,12 +18,12 @@ const infoboxVisible = ref(false)
 const geoserver =
   'https://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const defensiveMarker = L.icon({
-  iconUrl: '@/assets/pin-defensive.svg',
+  iconUrl: 'pin-defensive.svg',
   iconSize: [25, 41]
 })
 
 const fortressMarker = L.icon({
-  iconUrl: '@/assets/pin-fortress.svg',
+  iconUrl: 'pin-fortress.svg',
   iconSize: [25, 41]
 })
 
