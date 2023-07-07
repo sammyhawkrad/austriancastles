@@ -57,7 +57,6 @@ onMounted(() => {
   const loadData = async () => {
     const response = await fetch(geoserver)
     const data = austriancastles.austriancastles || await response.json()
-    console.log(data)
     return data
   }
 
