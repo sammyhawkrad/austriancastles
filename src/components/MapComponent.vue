@@ -15,8 +15,8 @@ import 'leaflet.featuregroup.subgroup'
 
 const clickedCastle = ref({})
 const infoboxVisible = ref(false)
-const geoserver =
-  'https://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
+const geoserver = 'https://github.com/sammyhawkrad/austriancastles/blob/main/src/assets/austriancastles.geojson'
+  // 'https://geoserver--vxkp129.bluemoss-ee5ab993.westus2.azurecontainerapps.io/geoserver/lbs/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lbs%3Aaustriancastles&outputFormat=application%2Fjson'
 const defensiveMarker = L.icon({
   iconUrl: 'pin-defensive.svg',
   iconSize: [25, 41]
