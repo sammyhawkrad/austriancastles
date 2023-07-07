@@ -55,8 +55,8 @@ onMounted(() => {
   L.control.scale({ position: 'bottomleft', metric: true, imperial: false }).addTo(map)
 
   const loadData = async () => {
-    const response = await fetch(geoserver)
-    const data = austriancastles.austriancastles || await response.json()
+    //const response = await fetch(geoserver)
+    const data = austriancastles.austriancastles //|| await response.json()
     return data
   }
 
