@@ -29,7 +29,7 @@ const fortressMarker = L.icon({
 })
 
 onMounted(() => {
-  const apiKey = '3kTwvEjW6co3cJtocvxH'
+  const apiKey = 'fTqz035OSDg9GsUaD2Fu'
 
   const map = L.map(document.getElementById('map')).setView([47.691, 13.388], 8)
 
